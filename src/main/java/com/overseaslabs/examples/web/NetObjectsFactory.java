@@ -13,7 +13,7 @@ import java.net.URI;
  */
 public class NetObjectsFactory {
 
-    @Value("uri.apiGate")
+    @Value("${apiGate.uri}")
     private String apiGateUri;
 
     /**
@@ -80,6 +80,7 @@ public class NetObjectsFactory {
         return makeUriBuilder(path)
                 .queryParam("page", pageable.getPageNumber())
                 .queryParam("size", pageable.getPageSize())
+                .queryParam("sort", "id,desc")
                 .build()
                 .encode()
                 .toUri();
