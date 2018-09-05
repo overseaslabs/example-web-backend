@@ -27,11 +27,11 @@ mainClassName = 'com.overseaslabs.examples.web.App'
 
 dependencies {
     compile(
-            [group: 'com.overseaslabs.example', name: 'entities', version: '1.0'],
+            [group: 'com.overseaslabs.example', name: 'entities', version: '0.1.0'],
             [group: 'com.overseaslabs.example', name: 'utils', version: '1.0'],
             [group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.4.RELEASE'],
             [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'],
-            [group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.4.RELEASE']
+            [group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.4.RELEASE'],
     )
 
     testCompile(
