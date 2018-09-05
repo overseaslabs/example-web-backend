@@ -17,7 +17,7 @@ public class EmailController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
-    @GetMapping("/emails")
+    @GetMapping("/mailer/emails")
     ResponseEntity<Email> get(Pageable pageable) {
         return restTemplate.exchange(netObjectsFactory.makeUri("emails", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("mailer"), Email.class);
     }

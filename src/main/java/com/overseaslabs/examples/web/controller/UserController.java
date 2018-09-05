@@ -20,18 +20,25 @@ public class UserController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
-    @GetMapping("/users")
-    ResponseEntity<User> get(Pageable pageable) {
-        return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), User.class);
+    @GetMapping("/ureg/users")
+    ResponseEntity<RestPageImpl<User>> get(Pageable pageable) {
+        ParameterizedTypeReference<RestPageImpl<User>> ptr = new ParameterizedTypeReference<RestPageImpl<User>>() {
+        };
+        return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), ptr);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/ureg/users/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.DELETE, netObjectsFactory.makeHttpEntity("ureg"), String.class);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/ureg/users/{id}")
     public ResponseEntity<User> update(@PathVariable Integer id, @RequestBody User user) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.PUT, netObjectsFactory.makeHttpEntity("ureg", user), User.class);
+    }
+
+    @PostMapping("/ureg/users")
+    public ResponseEntity<User> create(@RequestBody User user) {
+        return restTemplate.exchange(netObjectsFactory.makeUri("users"), HttpMethod.POST, netObjectsFactory.makeHttpEntity("ureg", user), User.class);
     }
 }
