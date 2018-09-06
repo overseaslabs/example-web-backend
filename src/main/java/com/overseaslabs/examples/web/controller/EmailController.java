@@ -1,8 +1,10 @@
 package com.overseaslabs.examples.web.controller;
 
 import com.overseaslabs.examples.mailer.entity.Email;
+import com.overseaslabs.examples.utils.RestPageImpl;
 import com.overseaslabs.examples.web.NetObjectsFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,9 @@ public class EmailController {
     private NetObjectsFactory netObjectsFactory;
 
     @GetMapping("/mailer/emails")
-    ResponseEntity<Email> get(Pageable pageable) {
-        return restTemplate.exchange(netObjectsFactory.makeUri("emails", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("mailer"), Email.class);
+    ResponseEntity<RestPageImpl<Email>> get(Pageable pageable) {
+        ParameterizedTypeReference<RestPageImpl<Email>> ptr = new ParameterizedTypeReference<RestPageImpl<Email>>() {
+        };
+        return restTemplate.exchange(netObjectsFactory.makeUri("emails", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("mailer"), ptr);
     }
 }
