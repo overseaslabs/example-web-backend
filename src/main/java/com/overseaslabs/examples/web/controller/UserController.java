@@ -10,8 +10,6 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-
 @RestController
 public class UserController {
     @Autowired
@@ -20,25 +18,26 @@ public class UserController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
+    private final static ParameterizedTypeReference<RestPageImpl<User>> ptr = new ParameterizedTypeReference<RestPageImpl<User>>() {
+    };
+
     @GetMapping("/ureg/users")
-    ResponseEntity<RestPageImpl<User>> get(Pageable pageable) {
-        ParameterizedTypeReference<RestPageImpl<User>> ptr = new ParameterizedTypeReference<RestPageImpl<User>>() {
-        };
-        return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), ptr);
+    ResponseEntity<String> get(Pageable pageable) {
+        return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), String.class);
     }
 
     @DeleteMapping("/ureg/users/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) {
-        return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.DELETE, netObjectsFactory.makeHttpEntity("ureg"), String.class);
+    ResponseEntity<Void> delete(@PathVariable Integer id) {
+        return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.DELETE, netObjectsFactory.makeHttpEntity("ureg"), Void.class);
     }
 
     @PutMapping("/ureg/users/{id}")
-    public ResponseEntity<User> update(@PathVariable Integer id, @RequestBody User user) {
-        return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.PUT, netObjectsFactory.makeHttpEntity("ureg", user), User.class);
+    ResponseEntity<String> update(@PathVariable Integer id, @RequestBody User user) {
+        return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.PUT, netObjectsFactory.makeHttpEntity("ureg", user), String.class);
     }
 
     @PostMapping("/ureg/users")
-    public ResponseEntity<User> create(@RequestBody User user) {
-        return restTemplate.exchange(netObjectsFactory.makeUri("users"), HttpMethod.POST, netObjectsFactory.makeHttpEntity("ureg", user), User.class);
+    ResponseEntity<String> create(@RequestBody User user) {
+        return restTemplate.exchange(netObjectsFactory.makeUri("users"), HttpMethod.POST, netObjectsFactory.makeHttpEntity("ureg", user), String.class);
     }
 }
