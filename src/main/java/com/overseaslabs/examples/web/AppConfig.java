@@ -9,8 +9,10 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
+    public RestTemplate restTemplate(RestTemplateBuilder builder, APIResponseHandler apiResponseHandler) {
+        return builder
+                .errorHandler(apiResponseHandler)
+                .build();
     }
 
     @Bean
