@@ -18,9 +18,6 @@ public class UserController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
-    private final static ParameterizedTypeReference<RestPageImpl<User>> ptr = new ParameterizedTypeReference<RestPageImpl<User>>() {
-    };
-
     @GetMapping("/ureg/users")
     ResponseEntity<String> get(Pageable pageable) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), String.class);

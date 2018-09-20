@@ -10,6 +10,9 @@ import org.springframework.web.client.ResponseErrorHandler;
 
 import java.io.IOException;
 
+/**
+ * Error handler for the RestTemplate
+ */
 @Component
 public class APIResponseHandler implements ResponseErrorHandler {
     private static final Logger log = LoggerFactory.getLogger(APIResponseHandler.class);
