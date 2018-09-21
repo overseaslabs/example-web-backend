@@ -24,6 +24,7 @@ public class APIResponseHandler implements ResponseErrorHandler {
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
+        //only 5** statuses are interpreted as errors
         return response.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR;
     }
 }

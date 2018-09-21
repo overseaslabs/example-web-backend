@@ -2,15 +2,11 @@ package com.overseaslabs.examples.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.overseaslabs.examples.mailer.entity.ProviderResponse;
-import com.overseaslabs.examples.ureg.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;

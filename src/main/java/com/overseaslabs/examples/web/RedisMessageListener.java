@@ -18,6 +18,7 @@ public class RedisMessageListener implements MessageListener {
     private SimpMessagingTemplate template;
 
     public void onMessage(Message message, byte[] pattern) {
+        //forward a mailer report to the websocket for showing it in the UI
         ProviderResponse response = null;
 
         try {

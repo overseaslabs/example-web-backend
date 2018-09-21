@@ -15,9 +15,15 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class AppConfig {
+    /**
+     * Redis host
+     */
     @Value("${spring.redis.host}")
     private String host;
 
+    /**
+     * Redis port
+     */
     @Value("${spring.redis.port}")
     private Integer port;
 

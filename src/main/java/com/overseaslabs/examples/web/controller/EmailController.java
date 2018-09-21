@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Proxies requests to the mailer microservice
+ */
 @RestController
 public class EmailController {
     @Autowired
@@ -19,8 +22,11 @@ public class EmailController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
+    /**
+     * Fetch emails
+     */
     @GetMapping("/mailer/emails")
-    ResponseEntity<RestPageImpl<Email>> get(Pageable pageable) {
+    public ResponseEntity<RestPageImpl<Email>> get(Pageable pageable) {
         ParameterizedTypeReference<RestPageImpl<Email>> ptr = new ParameterizedTypeReference<RestPageImpl<Email>>() {
         };
         return restTemplate.exchange(netObjectsFactory.makeUri("emails", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("mailer"), ptr);

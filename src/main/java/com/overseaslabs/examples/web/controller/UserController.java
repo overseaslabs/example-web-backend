@@ -10,6 +10,9 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Proxies requests to the user registry microservice
+ */
 @RestController
 public class UserController {
     @Autowired
@@ -18,23 +21,35 @@ public class UserController {
     @Autowired
     private NetObjectsFactory netObjectsFactory;
 
+    /**
+     * Fetch users
+     */
     @GetMapping("/ureg/users")
-    ResponseEntity<String> get(Pageable pageable) {
+    public ResponseEntity<String> get(Pageable pageable) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users", pageable), HttpMethod.GET, netObjectsFactory.makeHttpEntity("ureg"), String.class);
     }
 
+    /**
+     * Delete the user
+     */
     @DeleteMapping("/ureg/users/{id}")
-    ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.DELETE, netObjectsFactory.makeHttpEntity("ureg"), Void.class);
     }
 
+    /**
+     * Fetch the user
+     */
     @PutMapping("/ureg/users/{id}")
-    ResponseEntity<String> update(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<String> update(@PathVariable Integer id, @RequestBody User user) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users/" + id), HttpMethod.PUT, netObjectsFactory.makeHttpEntity("ureg", user), String.class);
     }
 
+    /**
+     * Create a user
+     */
     @PostMapping("/ureg/users")
-    ResponseEntity<String> create(@RequestBody User user) {
+    public ResponseEntity<String> create(@RequestBody User user) {
         return restTemplate.exchange(netObjectsFactory.makeUri("users"), HttpMethod.POST, netObjectsFactory.makeHttpEntity("ureg", user), String.class);
     }
 }

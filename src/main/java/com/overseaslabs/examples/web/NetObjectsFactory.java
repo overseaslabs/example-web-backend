@@ -13,6 +13,9 @@ import java.net.URI;
  */
 public class NetObjectsFactory {
 
+    /**
+     * API gate URI
+     */
     @Value("${apiGate.uri}")
     private String apiGateUri;
 
@@ -55,7 +58,7 @@ public class NetObjectsFactory {
      * @param path API path
      * @return URI builder
      */
-    private UriComponentsBuilder makeUriBuilder(String path) {
+    public UriComponentsBuilder makeUriBuilder(String path) {
         return UriComponentsBuilder.fromUriString(apiGateUri).path(path);
     }
 
