@@ -1,10 +1,8 @@
 package com.overseaslabs.examples.web.controller;
 
 import com.overseaslabs.examples.ureg.entity.User;
-import com.overseaslabs.examples.utils.RestPageImpl;
 import com.overseaslabs.examples.web.NetObjectsFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
